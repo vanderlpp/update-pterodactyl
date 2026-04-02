@@ -20,7 +20,7 @@ A instalação é feita com um único comando. Acesse o terminal do seu servidor
 
 ## 🚀 Instalação Direta
 ```bash
-bash -c "$(curl -fsSL [https://raw.githubusercontent.com/vanderlpp/update-pterodactyl/main/install.sh](https://raw.githubusercontent.com/vanderlpp/update-pterodactyl/main/install.sh))"
+bash -c "$(curl -fsSL (https://raw.githubusercontent.com/vanderlpp/update-pterodactyl/main/install.sh))"
 ````
 
 # Testando o Sistema
