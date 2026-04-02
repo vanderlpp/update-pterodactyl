@@ -20,8 +20,35 @@ echo "3. Clique em 'Novo Webhook' e depois em 'Copiar URL do Webhook'."
 echo "------------------------------------------------------"
 echo ""
 
-# Solicita o Webhook ao usuário
-read -p "Cole aqui a URL do seu Webhook: " USER_WEBHOOK
+# Verifica se já existe um webhook configurado anteriormente
+EXISTING_WEBHOOK=""
+if [ -f "/usr/local/bin/notify_discord.sh" ] && grep -q 'WEBHOOK_URL="http' "/usr/local/bin/notify_discord.sh"; then
+    EXISTING_WEBHOOK=$(grep -m 1 'WEBHOOK_URL="http' "/usr/local/bin/notify_discord.sh" | cut -d'"' -f2)
+elif [ -f "/usr/local/bin/notify_wings_discord.sh" ] && grep -q 'WEBHOOK_URL="http' "/usr/local/bin/notify_wings_discord.sh"; then
+    EXISTING_WEBHOOK=$(grep -m 1 'WEBHOOK_URL="http' "/usr/local/bin/notify_wings_discord.sh" | cut -d'"' -f2)
+fi
+
+USER_WEBHOOK=""
+
+# Lógica de reutilização ou novo Webhook
+if [ -n "$EXISTING_WEBHOOK" ]; then
+    echo "[!] Encontramos um Webhook já configurado neste servidor:"
+    echo "$EXISTING_WEBHOOK"
+    echo ""
+    read -p "Deseja reutilizar este Webhook? [S/n]: " REUSE_WH
+    
+    # Se o usuário digitar N ou n, pede um novo
+    if [[ "$REUSE_WH" =~ ^[Nn]$ ]]; then
+        echo ""
+        read -p "Cole aqui a NOVA URL do seu Webhook: " USER_WEBHOOK
+    else
+        USER_WEBHOOK="$EXISTING_WEBHOOK"
+        echo ">> Webhook existente selecionado."
+    fi
+else
+    # Se não achar nada, apenas pede a URL normalmente
+    read -p "Cole aqui a URL do seu Webhook: " USER_WEBHOOK
+fi
 
 # Valida se o usuário não deixou em branco
 if [ -z "$USER_WEBHOOK" ]; then
