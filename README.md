@@ -18,5 +18,27 @@ O script atua de forma silenciosa no servidor, consultando a API do GitHub a cad
 
 A instalação é feita com um único comando. Acesse o terminal do seu servidor (Painel ou Node) com privilégios de `root` e execute:
 
+## 🚀 Instalação Direta
 ```bash
-bash <(curl -s [https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/install.sh](https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPOSITORIO/main/install.sh))
+bash -c "$(curl -fsSL [https://raw.githubusercontent.com/vanderlpp/update-pterodactyl/main/install.sh](https://raw.githubusercontent.com/vanderlpp/update-pterodactyl/main/install.sh))"
+````
+
+# Testando o Sistema
+Após a instalação, você pode validar o funcionamento disparando um alerta de teste.
+
+No Servidor do Painel (Panel)
+Bash
+## 1. Testar apenas o envio da mensagem
+/usr/local/bin/notify_discord.sh "TESTE-PAINEL"
+
+## 2. Simular detecção de nova versão (Forçar Alerta)
+echo "0.0.1" > /tmp/ptero_current_version && rm -f /tmp/ptero_notified_*
+/usr/local/bin/pteroupdate.sh check
+# Nos Nodes (Wings)
+Bash
+## 1. Testar apenas o envio da mensagem
+/usr/local/bin/notify_wings_discord.sh "TESTE-WINGS"
+
+## 2. Simular detecção de nova versão (Forçar Alerta)
+echo "0.0.1" > /tmp/wings_current_version && rm -f /tmp/wings_notified_*
+/usr/local/bin/wingsupdate.sh check
