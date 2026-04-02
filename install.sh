@@ -230,3 +230,32 @@ fi
 echo "------------------------------------------------------"
 echo "✅ Processo de instalação finalizado com sucesso!"
 echo "As verificações ocorrerão automaticamente a cada 6 horas."
+echo "------------------------------------------------------"
+echo ""
+echo "======================================================"
+echo "🧪 COMO TESTAR O SISTEMA AGORA MESMO:"
+echo "======================================================"
+echo "Dica inicial: Para os atalhos funcionarem imediatamente,"
+echo "pode ser necessário rodar o comando: source ~/.bashrc"
+echo ""
+
+if [ "$IS_PANEL" = true ]; then
+    echo "▶ PARA O PAINEL:"
+    echo "1. Para forçar a verificação de update (não fará nada se já estiver atualizado):"
+    echo "   /usr/local/bin/pteroupdate.sh check"
+    echo ""
+    echo "2. Para rodar o comando de atualização manual:"
+    echo "   update_painel"
+    echo ""
+fi
+
+if [ "$IS_WINGS" = true ]; then
+    echo "▶ PARA O WINGS:"
+    echo "1. Para forçar a verificação de update (não fará nada se já estiver atualizado):"
+    echo "   /usr/local/bin/wingsupdate.sh check"
+    echo ""
+    echo "2. Para rodar o comando de atualização manual:"
+    echo "   update_wings"
+    echo ""
+fi
+echo "======================================================"
